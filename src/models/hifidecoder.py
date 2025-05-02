@@ -8,7 +8,7 @@ from src.components.causal_conv import CausalConv
 from src.components.speaker_adapter import SpeakerAdapter
 
 from src.components.streaming import StreamingContainer, StreamingAdd
-from src.models.moshi.utils.compile import torch_compile_lazy
+from src.utils.compile import torch_compile_lazy
 
 
 LRELU_SLOPE = 0.1

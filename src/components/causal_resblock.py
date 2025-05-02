@@ -5,9 +5,6 @@ from torch.nn import Conv1d
 from torch.nn.utils.parametrizations import weight_norm
 from torch.nn.utils import remove_weight_norm
 
-
-
-from src.utils import init_weights
 from src.components.streaming import StreamingContainer, StreamingAdd
 from src.components.causal_conv import CausalConv
 from src.utils.compile import torch_compile_lazy

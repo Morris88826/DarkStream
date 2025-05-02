@@ -9,9 +9,9 @@ from torchmetrics import MinMetric, MeanMetric
 from torchmetrics.classification.accuracy import Accuracy
 
 from src.models import HiFiEncoder, HiFiDecoder
-from src.modules import PasrModuleV2 as PasrModule
+from src.modules import PasrModule
 from src.components.discriminator import Discriminator
-from src.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED, HuBERTLoss, SpeakerLoss
+from src.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED #HuBERTLoss, SpeakerLoss
 
 
 @dataclass

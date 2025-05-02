@@ -2,7 +2,6 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 
-from src.models.utils import init_weights
 from src.components.causal_conv import CausalConv, CausalConvTranspose1D
 from src.components.causal_resblock import ResBlock
 from src.components.speaker_adapter import SpeakerAdapter

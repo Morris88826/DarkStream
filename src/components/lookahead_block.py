@@ -3,7 +3,6 @@ import torch.nn as nn
 from torch.nn.utils.parametrizations import weight_norm
 from torch.nn.utils import remove_weight_norm
 
-from src.models.utils import get_padding
 from src.components.streaming import StreamingContainer
 from src.components.causal_conv import CausalConv
 

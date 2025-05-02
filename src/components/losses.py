@@ -7,7 +7,7 @@ from audiotools import AudioSignal
 from audiotools import STFTParams
 from torch import nn
 from speechbrain.lobes.models.huggingface_transformers.hubert import HuBERT
-from src.models import SpeakerEncoder
+# from src.models import SpeakerEncoder
 
 
 class L1Loss(nn.L1Loss):
@@ -458,19 +458,19 @@ class HuBERTLoss(nn.Module):
         return loss
 
 
-class SpeakerLoss(nn.Module):
-    """Loss Computation for Speaker model using CosineEmbeddingLoss"""
+# class SpeakerLoss(nn.Module):
+#     """Loss Computation for Speaker model using CosineEmbeddingLoss"""
 
-    def __init__(self, loss_fn: typing.Callable = nn.CosineEmbeddingLoss(), device = "cuda"):
-        super().__init__()
-        self.loss_fn = loss_fn
-        self.model = SpeakerEncoder(device=device)
-        self.device = device
+#     def __init__(self, loss_fn: typing.Callable = nn.CosineEmbeddingLoss(), device = "cuda"):
+#         super().__init__()
+#         self.loss_fn = loss_fn
+#         self.model = SpeakerEncoder(device=device)
+#         self.device = device
 
-    def forward(self, inputs, target_embeddings):
-        if isinstance(inputs, AudioSignal):
-            inputs = getattr(inputs, "audio_data").to(self.device)
+#     def forward(self, inputs, target_embeddings):
+#         if isinstance(inputs, AudioSignal):
+#             inputs = getattr(inputs, "audio_data").to(self.device)
             
-        input_embeds = self.model(inputs.squeeze())
-        loss = self.loss_fn(input_embeds, target_embeddings, torch.ones(input_embeds.shape[0]).to(input_embeds.device))
-        return loss
+#         input_embeds = self.model(inputs.squeeze())
+#         loss = self.loss_fn(input_embeds, target_embeddings, torch.ones(input_embeds.shape[0]).to(input_embeds.device))
+#         return loss
