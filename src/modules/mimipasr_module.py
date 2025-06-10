@@ -10,7 +10,7 @@ from torchmetrics.classification.accuracy import Accuracy
 from src.models.moshi.modules import SEANetEncoder, transformer
 from src.models import MimiEncoderModel
 from src.models.components.code_predictor import CodePredictor
-from src.models.utils.data_classes import SeanetArgs, TransformerArgs
+from src.models.components.data_classes import SeanetArgs, TransformerArgs
 
 
 class MimiPasrModule(pl.LightningModule):

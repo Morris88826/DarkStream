@@ -12,9 +12,9 @@ from src.modules import MimiPasrModule
 from src.models import MimiEncoderModel, MimiDecoderModel
 from src.components import SEANetEncoder, transformer, ConditionalSEANetDecoder, SpeakerVarianceAdapter
 from src.components.discriminator import Discriminator
-from src.models.quantizer.apply_kmeans import BatchKMeans
-from src.models.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED, HuBERTLoss, SpeakerLoss
-from src.models.utils.data_classes import SeanetArgs, TransformerArgs, DecSeanetArgs, VarianceAdapterArgs, Lambdas
+from src.components.quantizer.apply_kmeans import BatchKMeans
+from src.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED, HuBERTLoss, SpeakerLoss
+from src.components.data_classes import SeanetArgs, TransformerArgs, DecSeanetArgs, VarianceAdapterArgs, Lambdas
 
 
 

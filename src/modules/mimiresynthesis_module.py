@@ -10,10 +10,10 @@ from torchmetrics.classification.accuracy import Accuracy
 
 from src.modules import MimiPasrModule
 from src.models import MimiEncoderModel, MimiDecoderModel
-from src.models.moshi.modules import SEANetEncoder, transformer, ConditionalSEANetDecoder, SpeakerVarianceAdapter
-from src.models.components.discriminator import Discriminator
-from src.models.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED, HuBERTLoss, SpeakerLoss
-from src.models.utils.data_classes import SeanetArgs, TransformerArgs, DecSeanetArgs, VarianceAdapterArgs, Lambdas
+from src.components import SEANetEncoder, transformer, ConditionalSEANetDecoder, SpeakerVarianceAdapter
+from src.components.discriminator import Discriminator
+from src.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED, HuBERTLoss, SpeakerLoss
+from src.components.data_classes import SeanetArgs, TransformerArgs, DecSeanetArgs, VarianceAdapterArgs, Lambdas
 
 
 
