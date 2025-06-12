@@ -70,7 +70,9 @@ python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yam
 python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --ckpt_path <ckpt_path> --trainer.logger.id exp1_id
 ```
 
+### Inference
 
+See [inference.ipynb](inference.ipynb)
 
 
 
