@@ -19,6 +19,26 @@ real-time speech communication.
 Visit our [demo website](https://warisqr007.github.io/demos/darkstream/) for audio samples.
 
 
+## Checkpoints
+
+| Model type    |  Lookahead  |  Link  |
+----------------------------------------
+| Wav           |  0 ms       |        |
+----------------------------------------
+| Wav + CL      |  0 ms       |        |
+----------------------------------------
+| Wav           |  140 ms     |        |
+----------------------------------------
+| Wav + CL      |  140 ms     |        |
+----------------------------------------
+| Wav + CL + KM |  140 ms     |        |
+----------------------------------------
+| Wav           |  280 ms     |        |
+----------------------------------------
+| Wav  + CL     |  280 ms     |        |
+----------------------------------------
+
+
 ## Usage
 
 ### Installation
