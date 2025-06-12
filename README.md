@@ -1,63 +1,89 @@
-Checkpoint [link](https://drive.google.com/drive/folders/1O-RwVehkGUlPYKetZtzwGBwy8_5htz1o?usp=sharing)
+# DarkStream: real-time speech anonymization with low latency
 
-see notebooks/inference.ipynb
+### Waris Quamer, Ricardo Gutierrez-Osuna
 
 
----------
-<div align="center">
+**Abstract :**
+We propose DarkStream, a streaming speech synthesis model for real-time speaker anonymization. 
+To improve content encoding under strict latency constraints, DarkStream combines a causal waveform 
+encoder, a short lookahead buffer, and transformer-based contextual layers. To further reduce 
+inference time, the model generates waveforms directly via a neural vocoder, thus removing 
+intermediate mel-spectrogram conversions. Finally, DarkStream anonymizes speaker identity by 
+injecting a GAN-generated pseudo-speaker embedding into linguistic features from the content encoder. 
+Evaluations show our model achieves strong anonymization, yielding close to 50% speaker verification 
+EER (near-chance performance) on the lazy-informed attack scenario, while maintaining acceptable 
+linguistic intelligibility (WER within 9%). By balancing low-latency, robust privacy, and minimal 
+intelligibility degradation, DarkStream provides a practical solution for privacy-preserving 
+real-time speech communication.
 
-# Pytorch Lightning Template
+Visit our [demo website](https://warisqr007.github.io/demos/darkstream/) for audio samples.
 
-[![Pytorch](https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/get-started/locally/)
-[![Pytorch Lightning](https://img.shields.io/badge/-Lightning-ffffff?logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iNDEiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0MSA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwLjQ5OTIgMEwwIDEyVjM2TDIwLjUgNDhMNDEgMzZWMTJMMjAuNDk5MiAwWk0xNi45NTAxIDM2LjAwMTZMMTkuMTA4OSAyNi42ODU2TDE0LjI1NDggMjEuODkyTDI0LjA3OTEgMTEuOTk5MkwyMS45MTYzIDIxLjMyOTZMMjYuNzQ0NCAyNi4wOTc2TDE2Ljk1MDEgMzYuMDAxNloiIGZpbGw9IiM3OTJFRTUiLz4KPC9zdmc+Cg==)](https://lightning.ai/docs/pytorch/stable/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-A template for simple deep learning projects using Lightning
+## Usage
 
-English | [中文](./README_ZH.md)
+### Installation
 
-</div>
+```bash
+# Clone project
+git clone https://github.com/DavidZhang73/pytorch-lightning-template <project_name>
+cd <project_name>
 
-## Introduction
+# [Optional] Create a conda virtual environment
+conda create -n <env_name> python=<3.8|3.9|3.10>
+conda activate <env_name>
 
-[PyTorch Lightning](https://lightning.ai/docs/pytorch/stable/) is to deep learning project development as [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) frameworks (such as [Spring](https://spring.io/), [Django](https://www.djangoproject.com/), etc.) are to website development. While it is possible to implement everything from scratch and achieve maximum flexibility (especially since [PyTorch](https://pytorch.org/) and its ecosystem are already quite straightforward), using a framework can help you quickly implement prototypes with guidance from ["best practices"](#best-practice) (personal opinion) to save a lot of boilerplate code through re-usability, and focus on scientific innovation rather than engineering challenges. This template is built using the full Lightning suite, follows the principle of [Occam's razor](https://en.wikipedia.org/wiki/Occam%27s_razor), and is friendly to researchers. It also includes a simple handwritten digit recognition task using the MNIST dataset. The repository also contains some [Tips](#tips), for reference.
+# [Optional] Use mamba instead of conda to speed up
+conda install mamba -n base -c conda-forge
 
-## "Best Practice"
+# [Optional] Install PyTorch according to the website to get GPU support
+# https://pytorch.org/get-started/
 
-### Using [Pytorch Lightning](https://lightning.ai/docs/pytorch/stable/) as a deep learning framework:
+# Install dependencies
+pip install -r requirements.txt
+```
 
-Most of the deep learning code can be divided into the following three parts([Reference [Chinese]](https://zhuanlan.zhihu.com/p/120331610)):
 
-1. Research code: This part pertains to the model and generally deals with customizations of the model's structure and training. In `Lightning`, this code is abstracted as the `pl.LightningModule` class. While dataset definition can also be included in this part, it is not recommended as it is not relevant to the experiment and should be included in `pl.LightningDataModule` instead.
+### Run
 
-2. Engineering code: This part of the code is essential for its high repeatability, such as setting early stopping, 16-bit precision, and GPU distributed training. In `Lightning`, this code is abstracted as the `pl.Trainer` class.
+**Fit**
 
-3. Non-essential code: This code is helpful in conducting experiments but is not directly related to the experiment itself, and can even be omitted. For example, gradient checking and outputting logs to `TensorBoard`. In Lightning, this code is abstracted as the `Callbacks` class, which is registered to `pl.Trainer`.
+```bash
+python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
+```
 
-The advantages of using `Lightning`:
+**Validate**
 
-1. Custom training processes and learning rate adjustment strategies can be implemented through various [hook functions](https://lightning.ai/docs/pytorch/stable/common/lightning_module.html#hooks) in `pl.LightningModule`.
+```bash
+python src/main.py validate -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
+```
 
-2. The model and data no longer need to be explicitly designated for devices (`tensor.to`, `tensor.cuda`, etc.). `pl.Trainer` handles this automatically, thereby supporting various [acceleration devices such as CPU, GPU, and TPU](https://lightning.ai/docs/pytorch/latest/extensions/accelerator.html).
+**Test**
 
-3. `pl.Trainer` implements various [training strategies](https://lightning.ai/docs/pytorch/latest/extensions/strategy.html), such as automatic mixed precision training, multi-GPU training, and distributed training.
+```bash
+python src/main.py test -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
+```
 
-4. `pl.Trainer` implements multiple [callbacks](https://lightning.ai/docs/pytorch/latest/extensions/callbacks.html) such as automatic model saving, automatic config saving, and automatic visualization result saving.
+**Inference**
 
-### Using [Pytorch Lightning CLI](https://lightning.ai/docs/pytorch/stable/cli/lightning_cli.html#lightning-cli) as a command-line tool:
+```bash
+python src/main.py predict -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
+```
 
-1. Using `lightning_cli` as the program entry point, model, data, and training parameters can be set through configuration files or command-line parameters, thereby achieving quick switching between multiple experiments.
+**Debug**
 
-2. `pl.LightningModule.save_hyperparameters()` saves the model's hyperparameters and automatically generates a command-line parameter table, eliminating the need for tools such as [`argparse`](https://docs.python.org/3/library/argparse.html) or [`hydra`](https://hydra.cc/).
+```bash
+python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.fast_dev_run true
+```
 
-### Using [Torchmetrics](https://torchmetrics.readthedocs.io/en/stable/) as a metric computation tool:
+**Resume**
 
-1. `Torchmetrics` provides multiple metric calculation methods such as `Accuracy`, `Precision`, and `Recall`.
+```bash
+python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --ckpt_path <ckpt_path> --trainer.logger.id exp1_id
+```
 
-2. It is integrated with `Lightning` and is compatible with parallel training strategies. Data is automatically aggregated to the main process for metric computation.
 
-### [Optional] Using [WanDB](https://wandb.ai/) to track experiments
+
+
 
 ### Project Architecture
 
@@ -116,29 +142,6 @@ The advantages of using `Lightning`:
 └── requirements.txt         # Dependency list
 ```
 
-## Usage
-
-### Installation
-
-```bash
-# Clone project
-git clone https://github.com/DavidZhang73/pytorch-lightning-template <project_name>
-cd <project_name>
-
-# [Optional] Create a conda virtual environment
-conda create -n <env_name> python=<3.8|3.9|3.10>
-conda activate <env_name>
-
-# [Optional] Use mamba instead of conda to speed up
-conda install mamba -n base -c conda-forge
-
-# [Optional] Install PyTorch according to the website to get GPU support
-# https://pytorch.org/get-started/
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
 ### Configuration
 
 1. Define dataset by inheriting `pl.LightningDataModule` in `src/data_module`.
@@ -148,44 +151,6 @@ pip install -r requirements.txt
 5. Define training module by inheriting `pl.LightningModule` in `src/modules`.
 6. Define the configuration file for the training module in `configs/model` as parameters for the custom `pl.LightningModule`.
 7. Configure `pl.trainer`, logs and other parameters in `configs/default.yaml`.
-
-### Run
-
-**Fit**
-
-```bash
-python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
-```
-
-**Validate**
-
-```bash
-python src/main.py validate -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
-```
-
-**Test**
-
-```bash
-python src/main.py test -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
-```
-
-**Inference**
-
-```bash
-python src/main.py predict -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
-```
-
-**Debug**
-
-```bash
-python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.fast_dev_run true
-```
-
-**Resume**
-
-```bash
-python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --ckpt_path <ckpt_path> --trainer.logger.id exp1_id
-```
 
 ## Tips
 
@@ -237,11 +202,4 @@ VECLIB_MAXIMUM_THREADS=8
 When you delete an experiment from the `wandb` web page, the cache of the experiment still exists in the local `wandb` directory, you can use the `scripts/clear_wandb_cache.py` script to clear the cache.
 
 [Wandb Python Documentation](https://docs.wandb.ai/ref/python/)
-
-## References
-
-Inspired by,
-
-- [deep-learning-project-template](https://github.com/Lightning-AI/deep-learning-project-template)
-- [lightning-hydra-template](https://github.com/ashleve/lightning-hydra-template)
 
