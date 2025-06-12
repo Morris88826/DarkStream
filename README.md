@@ -64,30 +64,6 @@ pip install -r requirements.txt
 python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
 ```
 
-**Validate**
-
-```bash
-python src/main.py validate -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
-```
-
-**Test**
-
-```bash
-python src/main.py test -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
-```
-
-**Inference**
-
-```bash
-python src/main.py predict -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
-```
-
-**Debug**
-
-```bash
-python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.fast_dev_run true
-```
-
 **Resume**
 
 ```bash
