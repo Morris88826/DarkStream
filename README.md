@@ -38,23 +38,19 @@ Visit our [demo website](https://warisqr007.github.io/demos/darkstream/) for aud
 
 ```bash
 # Clone project
-git clone https://github.com/DavidZhang73/pytorch-lightning-template <project_name>
-cd <project_name>
+git clone https://github.com/PSI-TAMU/DarkStream.git 
+cd DarkStream
 
 # [Optional] Create a conda virtual environment
-conda create -n <env_name> python=<3.8|3.9|3.10>
+conda create -n <env_name> python=3.10
 conda activate <env_name>
 
 # [Optional] Use mamba instead of conda to speed up
 conda install mamba -n base -c conda-forge
 
-# [Optional] Install PyTorch according to the website to get GPU support
-# https://pytorch.org/get-started/
-
 # Install dependencies
 pip install -r requirements.txt
 ```
-
 
 ### Run
 
