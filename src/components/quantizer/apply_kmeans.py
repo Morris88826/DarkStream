@@ -4,15 +4,18 @@ import torch.nn as nn
 
 
 class BatchKMeans(nn.Module):
-    def __init__(self, km_path: str, device: str = "cuda"):
+    def __init__(self, km_path: str = None, device: str = "cuda"):
         """
         km_path: path to your joblib-saved sklearn.KMeans
         device: "cuda" or "cpu"
         """
         super().__init__()
         # load cluster centers: shape (n_clusters, D)
-        km = joblib.load(km_path)
-        centers = torch.from_numpy(km.cluster_centers_).float()
+        if km_path is not None:
+            km = joblib.load(km_path)
+            centers = torch.from_numpy(km.cluster_centers_).float()
+        else:
+            centers = torch.randn(256, 512, device=device)
         
         # register as buffers so .to(device) moves them
         self.register_buffer("centers", centers)                 
