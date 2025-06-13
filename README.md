@@ -52,6 +52,10 @@ conda install mamba -n base -c conda-forge
 pip install -r requirements.txt
 ```
 
+### Data Preprocessing
+We follow the same data-processing stage as [here](https://github.com/PSI-TAMU/streamVC). Please follow directions in the specified repo.
+
+
 ### Run
 
 **Fit**
