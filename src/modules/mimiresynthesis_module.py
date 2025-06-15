@@ -12,7 +12,7 @@ from src.modules import MimiPasrModule
 from src.models import MimiEncoderModel, MimiDecoderModel
 from src.components import SEANetEncoder, transformer, ConditionalSEANetDecoder, SpeakerVarianceAdapter
 from src.components.discriminator import Discriminator
-from src.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED, HuBERTLoss, SpeakerLoss
+from src.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED  #HuBERTLoss, SpeakerLoss
 from src.components.data_classes import SeanetArgs, TransformerArgs, DecSeanetArgs, VarianceAdapterArgs, Lambdas
 
 
@@ -45,7 +45,7 @@ class MimiResynthesisModule(pl.LightningModule):
         learning_rate: float = 0.0001,
         lr_betas: list = [0.8, 0.99],
         lr_sch_gamma: float = 0.999996,
-        encoder_path: str = None, #"/mnt/nvme-data1/waris/PSI-TAMU/new_repo/Xarts/logs/xarts/mimipasr_nola/checkpoints/last.ckpt",
+        encoder_path: str = None,
         decoder_pretrained: bool = False,
         decoder_path: str = None,
     ):

@@ -9,7 +9,7 @@ from anonymization.demo_speaker_embeddings import DemoSpeakerEmbeddings
 
 class DemoGANAnonymizer:
 
-    def __init__(self, vec_type='xvector', device=None, sim_threshold=0.55):
+    def __init__(self, vec_type='xvector', device=None, sim_threshold=0.7):
         self.vec_type = vec_type
         self.device = device
 
@@ -40,38 +40,38 @@ class DemoGANAnonymizer:
         anon_vec = self._select_gan_vector(spk_vec=speaker_embedding)
         return anon_vec
 
-    def _select_gan_vector(self, spk_vec):
-        i = 0
-        limit = 20
-        num_attempts = len(self.unused_indices)
-        threshold = self.sim_threshold
-        while True:
-            idx = np.random.choice(self.unused_indices)
-            anon_vec = self.gan_vectors[idx]
-            sim = 1 - cosine(spk_vec.cpu().numpy(), anon_vec.cpu().numpy())
-            if sim < threshold:
-                break
-            i += 1
-            if i >= num_attempts:
-                print("No suitable anonymization vector found within the limit.")
-                threshold += 0.05
-                if threshold > 0.7:
-                    raise ValueError("No suitable anonymization vector found.")
-        # self.unused_indices = self.unused_indices[self.unused_indices != idx]
-        # if len(self.unused_indices) == 0:
-        #     self.unused_indices = self.load_unused_indices()
-        return anon_vec
     # def _select_gan_vector(self, spk_vec):
     #     i = 0
     #     limit = 20
-    #     while i < limit:
+    #     num_attempts = len(self.unused_indices)
+    #     threshold = self.sim_threshold
+    #     while True:
     #         idx = np.random.choice(self.unused_indices)
     #         anon_vec = self.gan_vectors[idx]
     #         sim = 1 - cosine(spk_vec.cpu().numpy(), anon_vec.cpu().numpy())
-    #         if sim < self.sim_threshold:
+    #         if sim < threshold:
     #             break
     #         i += 1
-    #     self.unused_indices = self.unused_indices[self.unused_indices != idx]
-    #     if len(self.unused_indices) == 0:
-    #         self.unused_indices = self.load_unused_indices()
+    #         if i >= num_attempts:
+    #             print("No suitable anonymization vector found within the limit.")
+    #             threshold += 0.05
+    #             if threshold > 0.7:
+    #                 raise ValueError("No suitable anonymization vector found.")
+    #     # self.unused_indices = self.unused_indices[self.unused_indices != idx]
+    #     # if len(self.unused_indices) == 0:
+    #     #     self.unused_indices = self.load_unused_indices()
     #     return anon_vec
+    def _select_gan_vector(self, spk_vec):
+        i = 0
+        limit = 20
+        while i < limit:
+            idx = np.random.choice(self.unused_indices)
+            anon_vec = self.gan_vectors[idx]
+            sim = 1 - cosine(spk_vec.cpu().numpy(), anon_vec.cpu().numpy())
+            if sim < self.sim_threshold:
+                break
+            i += 1
+        self.unused_indices = self.unused_indices[self.unused_indices != idx]
+        if len(self.unused_indices) == 0:
+            self.unused_indices = self.load_unused_indices()
+        return anon_vec

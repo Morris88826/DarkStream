@@ -1,5 +1,5 @@
 model:
-  class_path: modules.MimiKMResynthesisModule
+  class_path: modules.MimiResynthesisModule
   init_args:
     seanet_args:
       channels: 1
@@ -18,8 +18,8 @@ model:
       pad_mode: "constant"
       ratios: [8, 5, 4, 2]
       true_skip: true
-      look_ahead: true
-      look_ahead_size: 7
+      look_ahead: false
+      look_ahead_size: 0
     transformer_args:
       d_model: 512
       num_heads: 8
@@ -95,14 +95,13 @@ model:
     learning_rate: 0.0001
     lr_betas: [0.8, 0.99]
     lr_sch_gamma: 0.999996
-    encoder_path: /mnt/nvme-data1/waris/PSI-TAMU/new_repo/Xarts/logs/xarts/mimipasr_la15/checkpoints/last.ckpt
-    kmeans_path: /mnt/nvme-data1/waris/PSI-TAMU/new_repo/Xarts/content_feats/wav_140ms_la_cl/km256_model.bin
-    decoder_pretrained: true
-    decoder_path: /mnt/nvme-data1/waris/PSI-TAMU/new_repo/Xarts/logs/xarts/mimikmresynthesis_la15/checkpoints/last.ckpt
+    encoder_path: path/to/mimipasr_nola.ckpt
+    decoder_pretrained: false
+    decoder_path: null
 trainer:
   # Train, Validate, Test and Predict
   # Device https://lightning.ai/docs/pytorch/stable/common/trainer.html#accelerator
   accelerator: gpu # "cpu", "gpu", "tpu", "ipu", "auto"
-  devices: "2," # "2," for device id 2
+  devices: "0," # "2," for device id 2
   num_nodes: 1 # https://lightning.ai/docs/pytorch/stable/common/trainer.html#num-nodes
-  max_epochs: 20
+  max_epochs: 100

@@ -13,7 +13,7 @@ from src.models import MimiEncoderModel, MimiDecoderModel
 from src.components import SEANetEncoder, transformer, ConditionalSEANetDecoder, SpeakerVarianceAdapter
 from src.components.discriminator import Discriminator
 from src.components.quantizer.apply_kmeans import BatchKMeans
-from src.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED, HuBERTLoss, SpeakerLoss
+from src.components.losses import L1Loss, MultiScaleSTFTLoss, MelSpectrogramLoss, GANLoss, LossPED #, HuBERTLoss, SpeakerLoss
 from src.components.data_classes import SeanetArgs, TransformerArgs, DecSeanetArgs, VarianceAdapterArgs, Lambdas
 
 
@@ -75,10 +75,7 @@ class MimiKMResynthesisModule(pl.LightningModule):
             self.encoder.freeze()
 
         # Load pretrained kmeans
-        if kmeans_path is not None:
-            self.kmeans = BatchKMeans(self.hparams.kmeans_path, device=self.device)
-        else:
-            self.kmeans = None
+        self.kmeans = BatchKMeans(self.hparams.kmeans_path, device=self.device)
 
         ## Init decoder
         decoder_transformer = transformer.ProjectedTransformer(

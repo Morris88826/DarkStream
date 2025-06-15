@@ -175,3 +175,4 @@ cython_debug/
 notebooks/pretrained_models/
 notebooks/savedir/
 pretrained_models/
+ckpts/*.ckpt
