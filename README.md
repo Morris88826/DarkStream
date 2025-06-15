@@ -23,13 +23,13 @@ Visit our [demo website](https://warisqr007.github.io/demos/darkstream/) for aud
 
 | Model type    |  Lookahead  |  Link  |
 |---------------|-------------|--------|
-| Wav           |  0 ms       |        |
-| Wav + CL      |  0 ms       |        |
-| Wav           |  140 ms     |        |
-| Wav + CL      |  140 ms     |        |
-| Wav + CL + KM |  140 ms     |        |
-| Wav           |  280 ms     |        |
-| Wav  + CL     |  280 ms     |        |
+| Wav           |  0 ms       | [GDrive](https://drive.google.com/file/d/1YeGO6_NhyGbw-zFiYe04jJDu8UFEJq1e/view?usp=sharing) |
+| Wav + CL      |  0 ms       | [GDrive](https://drive.google.com/file/d/1JhtroQHxV-1qTzETtxidXE4sg5KznplQ/view?usp=sharing) |
+| Wav           |  140 ms     | [GDrive](https://drive.google.com/file/d/1k3WrFjINpW8ggR6v0aDx8geCWrQYmmoh/view?usp=sharing) |
+| Wav + CL      |  140 ms     | [GDrive](https://drive.google.com/file/d/1pohNzyyvuNaJu4Nq44SWG5iEpxJODSsF/view?usp=sharing) |
+| Wav + CL + KM |  140 ms     | [GDrive](https://drive.google.com/file/d/1pfdCHRAacD3ppdmx3B8IsMmloh6p02Xm/view?usp=sharing) |
+| Wav           |  280 ms     | [GDrive](https://drive.google.com/file/d/10kBxii3ragO_a4nvt6syCvVI-tKESJfd/view?usp=sharing) |
+| Wav  + CL     |  280 ms     | [GDrive](https://drive.google.com/file/d/1-hj2MwraXHFoouK2l2YfmRibFl6krZmf/view?usp=sharing) |
 
 
 ## Usage
