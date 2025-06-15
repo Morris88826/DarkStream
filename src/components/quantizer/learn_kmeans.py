@@ -158,7 +158,7 @@ if __name__ == "__main__":
     max_no_improvement = 100
     n_init = 20
     reassignment_ratio = 0.0
-    base_dir = Path("/mnt/nvme-data1/waris/PSI-TAMU/new_repo/Xarts/content_feats")
+    base_dir = Path("content_feats")
     
     n_clusters = 256
     files_npy = glob.glob(os.path.join(base_dir, "*_140ms_la_cl/train_*.npy"))

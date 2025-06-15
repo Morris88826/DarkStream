@@ -61,18 +61,30 @@ We follow the same data-processing stage as [here](https://github.com/PSI-TAMU/s
 **Fit**
 
 ```bash
-python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --trainer.logger.name exp1
+python src/main.py fit -c configs/data/pasr.yaml -c configs/model/mimipasr_la7.yaml --trainer.logger.name debug
 ```
 
 **Resume**
 
 ```bash
-python src/main.py fit -c configs/data/mnist.yaml -c configs/model/simplenet.yaml --ckpt_path <ckpt_path> --trainer.logger.id exp1_id
+python src/main.py fit -c configs/data/pasr.yaml -c configs/model/mimipasr_la7.yaml --ckpt_path <ckpt_path> --trainer.logger.id exp1_id
 ```
+
+The model is trained in 4 steps:
+1. Training the content encoder. For this use [pasr.yaml](configs/data/pasr.yaml) for data config and [mimi_pasr_la7.yaml](configs/model/mimipasr_la7.yaml) for model configs. `la7` corresponds to lookahead size of 140ms (i.e., 7 * 20ms frames). Change `model.init_args.seanet_args.look_ahead_size` accordingly to adjust lookahead size.
+
+2. Training resynthesis module. For this use [resynthesis.yaml](configs/data/resynthesis.yaml) for data config and [mimiresynthesis_la7.yaml](configs/model/mimiresynthesis_la7.yaml) for model configs. Set `model.init_args.encoder_path` to the trained checkpoint from step 1.
+
+3. Training k-mean model. Start by using [dump_content_features.py](preprocess/dump_content_features.py) file to generate content embeddings. Modifying the file according if using a different model/ckpt. Once the features are generated, use [learn_kmeans.py](src/components/quantizer/learn_kmeans.py) to train a k-means model.
+
+4. Optionally finetune the resynthesis model with quantized content embeddings. To do so, use [resynthesis.yaml](configs/data/resynthesis.yaml) for data config and [mimikmresynthesis_la7.yaml](configs/model/mimikmresynthesis_la7.yaml) for model configs. Set `model.init_args.encoder_path` to original content encoder checkpoint, `model.init_args.kmeans_path` to the learned kmeans model. Additionally set `model.init_args.decoder_pretrained: true` and `model.init_args.decoder_path` to checkpoint from step 2.
+
 
 ### Inference
 
-See [inference.ipynb](inference.ipynb)
+1. See [inference_slt24.ipynb](notebooks/inference_slt24.ipynb) for SLT24 archiecture.
+
+2. See [inference_darkstream.ipynb](notebooks/inference_darkstream.ipynb) for new DarkStream archiecture.
 
 
 

@@ -187,6 +187,10 @@ class ResynthesisDataModule(pl.LightningDataModule):
         Do not use it to assign state (self.x = y).
         """
         training_files = list(Path(self.hparams.data_dir).rglob("*.wav"))
+
+        self.training_files = training_files
+        # self.validation_files = training_files
+        # self.test_files = training_files
         training_files, self.validation_files, _, _ = train_test_split(training_files, training_files, test_size=0.01, random_state=42)
         self.training_files, self.test_files, _, _ = train_test_split(training_files, training_files, test_size=0.001, random_state=42)
 
