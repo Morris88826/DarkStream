@@ -1,8 +1,8 @@
 data:
   class_path: data_modules.ResynthesisDataModule
   init_args:
-    data_dir: data/speakers
-    batch_size: 12
+    data_dir: /mnt/nvme-data1/waris/streamVC_data/data
+    batch_size: 16
     num_workers: 4
     pin_memory: true
     segment_size: 30720

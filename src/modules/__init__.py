@@ -4,7 +4,9 @@ from src.modules.speaker_module import SpeakerModule
 
 from src.modules.mimipasr_module import MimiPasrModule
 from src.modules.mimiresynthesis_module import MimiResynthesisModule
+from src.modules.mimiresynthesisv2_module import MimiResynthesisV2Module
 from src.modules.mimikmresynthesis_module import MimiKMResynthesisModule
+from src.modules.mimiresidualkmresynthesis_module import MimiResidualKMResynthesisModule
 
 
 __all__ = [
@@ -13,5 +15,7 @@ __all__ = [
     "ResynthesisModule",
     "MimiPasrModule",
     "MimiResynthesisModule",
-    "MimiKMResynthesisModule"
+    "MimiResynthesisV2Module",
+    "MimiKMResynthesisModule",
+    "MimiResidualKMResynthesisModule",
 ]
