@@ -176,3 +176,4 @@ notebooks/pretrained_models/
 notebooks/savedir/
 pretrained_models/
 ckpts/*.ckpt
+logs/*
