@@ -172,8 +172,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-notebooks/pretrained_models/
+notebooks/pretrained_models
 notebooks/savedir/
 pretrained_models/
 ckpts/*.ckpt
 logs/*
+dummy*
+results*

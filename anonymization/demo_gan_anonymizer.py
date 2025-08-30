@@ -75,3 +75,12 @@ class DemoGANAnonymizer:
         if len(self.unused_indices) == 0:
             self.unused_indices = self.load_unused_indices()
         return anon_vec
+    
+    def return_all_gan_vectors_for_threshold(self, spk_vec, threshold):
+        selected_vectors = []
+        for idx in self.unused_indices:
+            anon_vec = self.gan_vectors[idx]
+            sim = 1 - cosine(spk_vec.cpu().numpy(), anon_vec.cpu().numpy())
+            if sim < threshold:
+                selected_vectors.append(anon_vec)
+        return selected_vectors

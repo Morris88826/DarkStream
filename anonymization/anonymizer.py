@@ -29,6 +29,12 @@ class DemoAnonymizer:
         self.dim_ranges = self._load_dim_ranges(model_path / TAGS_TO_MODELS[model_tag])
         self.anonymizer = self._load_anonymizer(model_path / TAGS_TO_MODELS[model_tag])
 
+    def return_all_gan_vectors_for_threshold(self, spk_vec, threshold=0.7):
+        if self.model_tag != 'gan':
+            raise ValueError("This function is only available for GAN-based anonymizer.")
+
+        return self.anonymizer.return_all_gan_vectors_for_threshold(spk_vec, threshold)
+    
     def anonymize_embedding(self, audio, sr):
 
         anon_embedding = self.anonymizer.anonymize_embedding(audio, sr)
