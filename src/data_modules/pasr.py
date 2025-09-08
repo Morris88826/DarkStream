@@ -64,13 +64,13 @@ class PasrDataset(Dataset):
         tokens = np.array([int(i) for i in tokens.split(" ")])
 
         audio, sampling_rate = load_audio(wav_fpath, self.sampling_rate)
-        if sampling_rate != self.sampling_rate:
-            import resampy
-            audio = resampy.resample(audio, sampling_rate, self.sampling_rate)
+        # if sampling_rate != self.sampling_rate:
+        #     import resampy
+        #     audio = resampy.resample(audio, sampling_rate, self.sampling_rate)
 
-        # audio = audio / MAX_WAV_VALUE
-        # audio = normalize(audio) * 0.95
-        audio = audio / (max(abs(audio)) + 0.001) * 0.95
+        # # audio = audio / MAX_WAV_VALUE
+        # # audio = normalize(audio) * 0.95
+        # audio = audio / (max(abs(audio)) + 0.001) * 0.95
 
         # Trim audio ending
         code_length = min(audio.shape[0] // self.code_hop_size, tokens.shape[-1])

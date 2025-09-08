@@ -17,7 +17,7 @@ from src.components.data_classes import SeanetArgs, TransformerArgs, DecSeanetAr
 
 
 
-class MimiResynthesisV2Module(pl.LightningModule):
+class MimiResynthesisWithLogitsModule(pl.LightningModule):
     """Example of LightningModule for MNIST classification.
     A LightningModule organizes your PyTorch code into 6 sections:
         - Computations (init)
@@ -325,65 +325,6 @@ class MimiResynthesisV2Module(pl.LightningModule):
 
 
 if __name__ == "__main__":
-    from src.models.utils.latency import average_latencies, average_rtf_modes
 
-    m = MimiResynthesisModule()
+    m = MimiResynthesisWithLogitsModule()
     print(m)
-    # GPU device
-    device = "cuda:0" if torch.cuda.is_available() else "cpu"
-
-    # Trials & durations for the measurements
-    TRIALS_LATENCY = 50
-    TRIALS_RTF     = 20
-    WARMUPS        = 5
-    DURATION_SEC   = 5.0
-
-    # Sweep over lookahead = 0, 7, 14 frames
-    for lookahead in (0, 7, 14):
-        print(f"\n\n===== Testing lookahead = {lookahead} frames =====")
-
-        # 1) build your SeanetArgs with this lookahead
-        seanet_args = SeanetArgs(
-            **{**asdict(SeanetArgs()),  # base defaults
-               "look_ahead": lookahead > 0,
-               "look_ahead_size": lookahead}
-        )
-
-        # 2) instantiate & move to device
-        model = MimiResynthesisModule(seanet_args=seanet_args)
-        model = model.to(device).eval()
-
-        # 3) frame_size = samples per step
-        frame_size = model.hparams.sample_rate // model.hparams.frame_rate
-
-        # 4) dummy speaker‐embed (just for timing)
-        embed_dim = model.hparams.variance_adapter_args.speaker_dim
-        embed = torch.randn(1, embed_dim, device=device)
-
-        # 5) measure encoder & joint latencies
-        print("\n-- Measuring encoder vs joint latencies --")
-        average_latencies(
-            resynthesizer=model,
-            frame_size=frame_size,
-            sampling_rate=model.hparams.sample_rate,
-            lookahead_frames=lookahead,
-            chunk_size=3,
-            embed=embed,
-            trials=TRIALS_LATENCY,
-            warmups=WARMUPS,
-            duration_s=DURATION_SEC,
-            device=device,
-        )
-
-        # # 6) measure real‑time factor in both modes
-        # print("\n-- Measuring RTF (non-streaming vs streaming) --")
-        # average_rtf_modes(
-        #     resynthesizer=model,
-        #     frame_size=frame_size,
-        #     sampling_rate=model.hparams.sample_rate,
-        #     lookahead_frames=lookahead,
-        #     embed=embed,
-        #     trials=TRIALS_RTF,
-        #     duration_s=DURATION_SEC,
-        #     device=device,
-        # )

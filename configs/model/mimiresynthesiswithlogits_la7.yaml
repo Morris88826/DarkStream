@@ -1,5 +1,5 @@
 model:
-  class_path: modules.MimiResynthesisV2Module
+  class_path: modules.MimiResynthesisWithLogitsModule
   init_args:
     seanet_args:
       channels: 1

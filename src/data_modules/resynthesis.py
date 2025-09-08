@@ -88,13 +88,13 @@ class ResynthesisDataset(Dataset):
 
 
         audio, sampling_rate = load_audio(wav_fpath, self.sampling_rate)
-        if sampling_rate != self.sampling_rate:
-            import resampy
-            audio = resampy.resample(audio, sampling_rate, self.sampling_rate)
+        # if sampling_rate != self.sampling_rate:
+        #     import resampy
+        #     audio = resampy.resample(audio, sampling_rate, self.sampling_rate)
 
-        # audio = audio / MAX_WAV_VALUE
-        # audio = normalize(audio) * 0.95
-        audio = audio / (max(abs(audio)) + 0.00001) * 0.8
+        # # audio = audio / MAX_WAV_VALUE
+        # # audio = normalize(audio) * 0.95
+        # audio = audio / (max(abs(audio)) + 0.00001) * 0.8
 
         # Trim audio ending
         code_length = min(audio.shape[0] // self.code_hop_size, tokens.shape[-1])

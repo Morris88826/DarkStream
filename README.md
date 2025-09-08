@@ -28,9 +28,10 @@ Visit our [demo website](https://warisqr007.github.io/demos/darkstream/) for aud
 | Wav           |  140 ms     | [GDrive](https://drive.google.com/file/d/1k3WrFjINpW8ggR6v0aDx8geCWrQYmmoh/view?usp=sharing) |
 | Wav + CL      |  140 ms     | [GDrive](https://drive.google.com/file/d/1pohNzyyvuNaJu4Nq44SWG5iEpxJODSsF/view?usp=sharing) |
 | Wav + CL + KM |  140 ms     | [GDrive](https://drive.google.com/file/d/1pfdCHRAacD3ppdmx3B8IsMmloh6p02Xm/view?usp=sharing) |
-| Wav + CL + ResidualKM (V2) with 2 Levels | 140 ms  | [GDrive](https://drive.google.com/file/d/17ki6NGtJLxmSbJzAmGZlVH8AyirAwdvw/view?usp=sharing) |
-| Wav + CL + ResidualKM (V2) with 4 Levels | 140 ms  | [GDrive](https://drive.google.com/file/d/12ij4ybFNmo8WLEBMoRzC9j88YIm5PGNh/view?usp=sharing) |
-| Wav + CL + ResidualKM (V2) with 8 Levels | 140 ms  | [GDrive](https://drive.google.com/file/d/1kJCgcYM06Xlxkj8Y_akSEpwKu7J7VVFe/view?usp=sharing) |
+| Wav + CL + ResidualKM with 2 Levels | 140 ms  | [GDrive](https://drive.google.com/file/d/17ki6NGtJLxmSbJzAmGZlVH8AyirAwdvw/view?usp=sharing) |
+| Wav + CL + ResidualKM with 4 Levels | 140 ms  | [GDrive](https://drive.google.com/file/d/12ij4ybFNmo8WLEBMoRzC9j88YIm5PGNh/view?usp=sharing) |
+| Wav + CL + ResidualKM with 8 Levels | 140 ms  | [GDrive](https://drive.google.com/file/d/1kJCgcYM06Xlxkj8Y_akSEpwKu7J7VVFe/view?usp=sharing) |
+| Wav + CL (w/ logits) | 140 ms  | [GDrive](https://drive.google.com/file/d/1pyByzdhqmoWmMKNuqS8N841KhueJw0-6/view?usp=sharing) |
 | Wav           |  280 ms     | [GDrive](https://drive.google.com/file/d/10kBxii3ragO_a4nvt6syCvVI-tKESJfd/view?usp=sharing) |
 | Wav  + CL     |  280 ms     | [GDrive](https://drive.google.com/file/d/1-hj2MwraXHFoouK2l2YfmRibFl6krZmf/view?usp=sharing) |
 
