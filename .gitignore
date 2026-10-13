@@ -180,4 +180,6 @@ logs/*
 dummy*
 results*
 
+__pycache__/
+.vscode/
 notebooks/pretrained_models/
