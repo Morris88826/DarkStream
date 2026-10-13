@@ -179,3 +179,5 @@ ckpts/*.ckpt
 logs/*
 dummy*
 results*
+
+notebooks/pretrained_models/
