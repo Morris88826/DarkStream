@@ -96,6 +96,8 @@ Extensions released with this repository that were not evaluated in the paper.
 
 Place downloaded checkpoints in [`ckpts/`](ckpts). The k-means models used by the KM variants (`km256_model.bin`, `km256_centers.pth`) are already included there.
 
+More pretrained checkpoints, including the stage-1 content encoders (e.g. `mimipasr_nola.ckpt`) used as `encoder_path` when training the resynthesis models, are available in this [Google Drive folder](https://drive.google.com/drive/folders/1pd8eD5kuMcou8_P1L9NS2ZoOet8ScGZy).
+
 ## Inference
 
 See [`notebooks/inference_darkstream.ipynb`](notebooks/inference_darkstream.ipynb) for non-streaming synthesis, frame-by-frame streaming synthesis, and anonymization with a GAN-generated pseudo-speaker embedding. Select the variant with `model_type`:
@@ -130,7 +132,7 @@ python src/main.py fit -c configs/data/pasr.yaml -c configs/model/mimipasr_la7.y
 
 To change the lookahead, set `model.init_args.seanet_args.look_ahead_size` (in 20 ms frames).
 
-**2. Resynthesis model.** Set `model.init_args.encoder_path` in the model config to the checkpoint from stage 1.
+**2. Resynthesis model.** Set `model.init_args.encoder_path` in the model config to the checkpoint from stage 1 (or a pretrained content encoder from the [Google Drive folder](https://drive.google.com/drive/folders/1pd8eD5kuMcou8_P1L9NS2ZoOet8ScGZy)).
 
 ```bash
 python src/main.py fit -c configs/data/resynthesis.yaml -c configs/model/mimiresynthesis_la7.yaml
